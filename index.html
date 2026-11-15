@@ -1,0 +1,2468 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENDLESS LOVE </title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+
+                /* =========================================
+           1. VARIABLES Y GENERAL
+        ========================================= */
+
+                :root {
+                    --fondo-verde: #062B20;
+                    --bosque: #145A3A;
+                    --bosque-claro: #1B7650;
+                    --azul: #55B8E8;
+                    --azul-oscuro: #123B55;
+                    --rojo: #E63946;
+                    --papel: #F2E2C4;
+                    --texto-papel: #2B2B2B;
+                    --blanco: #F5F5F0;
+                    --texto-suave: #B9CFC5;
+                    --mouseX: 50%;
+                    --mouseY: 50%;
+                }
+
+                * {
+                    margin: 0;
+                    padding: 0;
+                    box-sizing: border-box;
+                }
+
+                html {
+                    scroll-behavior: smooth;
+                }
+
+                body {
+                    min-height: 100vh;
+                    overflow-x: hidden;
+                    background: radial-gradient(circle at top, #145A3A, #062B20 75%);
+                    color: var(--blanco);
+                    font-family: 'DM Sans', sans-serif;
+                }
+
+                button {
+                    font-family: inherit;
+                    cursor: pointer;
+                    border: none;
+                }
+
+                    button:focus-visible {
+                        outline: 2px solid var(--azul);
+                        outline-offset: 5px;
+                    }
+
+                .hidden {
+                    display: none !important;
+                }
+
+                /* =========================================
+           2. FONDO ANIMADO
+        ========================================= */
+
+                #particles {
+                    position: fixed;
+                    inset: 0;
+                    width: 100%;
+                    height: 100%;
+                    pointer-events: none;
+                    z-index: 0;
+                }
+
+                body::before {
+                    content: "";
+                    position: fixed;
+                    inset: 0;
+                    pointer-events: none;
+                    z-index: 1;
+                    background: radial-gradient( circle at var(--mouseX) var(--mouseY), rgba(85, 184, 232, 0.12), transparent 30% );
+                }
+
+                .ambient-light {
+                    position: fixed;
+                    width: 450px;
+                    height: 450px;
+                    border-radius: 50%;
+                    filter: blur(120px);
+                    pointer-events: none;
+                    opacity: .15;
+                    z-index: 0;
+                }
+
+                .light-one {
+                    background: #168D62;
+                    top: 10%;
+                    left: -200px;
+                    animation: floatLight 12s infinite alternate;
+                }
+
+                .light-two {
+                    background: #238BC4;
+                    right: -200px;
+                    bottom: 5%;
+                    animation: floatLight 15s infinite alternate-reverse;
+                }
+
+                @keyframes floatLight {
+                    from {
+                        transform: translateY(-40px);
+                    }
+
+                    to {
+                        transform: translateY(80px);
+                    }
+                }
+
+                /* =========================================
+           3. LOGIN
+        ========================================= */
+
+                #loginScreen {
+                    position: fixed;
+                    inset: 0;
+                    z-index: 1000;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background: radial-gradient(circle at center, #145A3A, #031B15 80%);
+                }
+
+                .login-box {
+                    width: min(90%, 420px);
+                    text-align: center;
+                    padding: 45px 35px;
+                    border: 1px solid rgba(85,184,232,.25);
+                    border-radius: 20px;
+                    background: rgba(4, 35, 26, .75);
+                    backdrop-filter: blur(20px);
+                    box-shadow: 0 0 70px rgba(0,0,0,.35);
+                    animation: appear 1.2s ease;
+                }
+
+                .login-symbol {
+                    color: var(--azul);
+                    font-size: 38px;
+                    margin-bottom: 20px;
+                }
+
+                .login-box h1 {
+                    font-family: 'Cormorant Garamond', serif;
+                    font-size: 48px;
+                    font-weight: 400;
+                    letter-spacing: 4px;
+                    margin-bottom: 8px;
+                }
+
+                .login-box p {
+                    color: var(--texto-suave);
+                    font-size: 13px;
+                    letter-spacing: 2px;
+                    margin-bottom: 35px;
+                }
+
+                .login-box input {
+                    width: 100%;
+                    padding: 15px;
+                    text-align: center;
+                    background: rgba(255,255,255,.06);
+                    border: 1px solid rgba(85,184,232,.3);
+                    border-radius: 8px;
+                    color: white;
+                    font-size: 16px;
+                    letter-spacing: 5px;
+                    outline: none;
+                }
+
+                    .login-box input:focus {
+                        border-color: var(--azul);
+                    }
+
+                .primary-button {
+                    margin-top: 20px;
+                    padding: 14px 30px;
+                    border-radius: 30px;
+                    color: #062B20;
+                    background: var(--azul);
+                    font-size: 12px;
+                    font-weight: 600;
+                    letter-spacing: 2px;
+                    transition: .3s;
+                }
+
+                    .primary-button:hover {
+                        transform: translateY(-3px);
+                        box-shadow: 0 0 25px rgba(85,184,232,.4);
+                    }
+
+                .error-message {
+                    color: #ff8189;
+                    font-size: 12px;
+                    margin-top: 15px;
+                    min-height: 18px;
+                }
+
+                /* =========================================
+           4. INTRO
+        ========================================= */
+
+                #introScreen {
+                    position: fixed;
+                    inset: 0;
+                    z-index: 900;
+                    display: none;
+                    justify-content: center;
+                    align-items: center;
+                    background: radial-gradient(circle, #123B35, #031710 75%);
+                    text-align: center;
+                    padding: 25px;
+                }
+
+                    #introScreen.active {
+                        display: flex;
+                        animation: fadeIn 1.5s ease;
+                    }
+
+                .intro-content {
+                    max-width: 700px;
+                }
+
+                .intro-small {
+                    color: var(--azul);
+                    font-size: 11px;
+                    letter-spacing: 5px;
+                    margin-bottom: 30px;
+                }
+
+                .intro-content h1 {
+                    font-family: 'Cormorant Garamond', serif;
+                    font-size: clamp(38px, 7vw, 75px);
+                    font-weight: 400;
+                    line-height: 1.1;
+                    margin-bottom: 25px;
+                }
+
+                    .intro-content h1 span {
+                        color: var(--azul);
+                        font-style: italic;
+                    }
+
+                .intro-content p {
+                    color: #BBD1C8;
+                    font-size: 14px;
+                    line-height: 1.9;
+                    max-width: 500px;
+                    margin: auto;
+                }
+
+                .intro-button {
+                    margin-top: 40px;
+                    padding: 16px 35px;
+                    border: 1px solid var(--azul);
+                    border-radius: 40px;
+                    color: var(--azul);
+                    background: transparent;
+                    letter-spacing: 2px;
+                    font-size: 11px;
+                    transition: .4s;
+                }
+
+                    .intro-button:hover {
+                        color: var(--fondo-verde);
+                        background: var(--azul);
+                        box-shadow: 0 0 35px rgba(85,184,232,.35);
+                    }
+
+                /* =========================================
+           5.  PRINCIPAL
+        ========================================= */
+
+                #mainApp {
+                    display: none;
+                    position: relative;
+                    z-index: 2;
+                    min-height: 100vh;
+                }
+
+                    #mainApp.active {
+                        display: block;
+                        animation: fadeIn 1s ease;
+                    }
+
+                /* HEADER */
+
+                .topbar {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    height: 75px;
+                    padding: 0 6%;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    z-index: 100;
+                    background: rgba(4, 32, 24, .55);
+                    backdrop-filter: blur(15px);
+                    border-bottom: 1px solid rgba(255,255,255,.06);
+                }
+
+                .logo {
+                    font-family: 'Cormorant Garamond', serif;
+                    font-size: 25px;
+                    letter-spacing: 3px;
+                    color: var(--azul);
+                }
+
+                .menu-button {
+                    background: transparent;
+                    color: white;
+                    font-size: 25px;
+                    transition: .3s;
+                }
+
+                    .menu-button:hover {
+                        color: var(--azul);
+                        transform: rotate(90deg);
+                    }
+
+                /* =========================================
+           6. BARRA LATERAL
+        ========================================= */
+
+                .menu-overlay {
+                    position: fixed;
+                    inset: 0;
+                    z-index: 200;
+                    background: rgba(0,0,0,.5);
+                    opacity: 0;
+                    visibility: hidden;
+                    transition: .4s;
+                }
+
+                    .menu-overlay.active {
+                        opacity: 1;
+                        visibility: visible;
+                    }
+
+                .sidebar {
+                    position: fixed;
+                    top: 0;
+                    right: -350px;
+                    height: 100%;
+                    width: min(320px, 85%);
+                    z-index: 201;
+                    padding: 90px 35px;
+                    background: #06291F;
+                    border-left: 1px solid rgba(85,184,232,.2);
+                    transition: .5s cubic-bezier(.7,0,.2,1);
+                }
+
+                    .sidebar.active {
+                        right: 0;
+                    }
+
+                    .sidebar h2 {
+                        font-family: 'Cormorant Garamond', serif;
+                        font-size: 35px;
+                        font-weight: 400;
+                        color: var(--azul);
+                        margin-bottom: 35px;
+                    }
+
+                    .sidebar button {
+                        display: block;
+                        width: 100%;
+                        text-align: left;
+                        padding: 17px 0;
+                        color: #C5D7CF;
+                        background: transparent;
+                        border-bottom: 1px solid rgba(255,255,255,.08);
+                        font-size: 13px;
+                        letter-spacing: 1px;
+                        transition: .3s;
+                    }
+
+                        .sidebar button:hover {
+                            color: var(--azul);
+                            padding-left: 10px;
+                        }
+
+                /* =========================================
+           7. SECCIONES
+        ========================================= */
+
+                .page-section {
+                    display: none;
+                    min-height: 100vh;
+                    padding: 125px 7% 80px;
+                    animation: sectionAppear .8s ease;
+                }
+
+                    .page-section.active {
+                        display: block;
+                    }
+
+                @keyframes sectionAppear {
+                    from {
+                        opacity: 0;
+                        transform: translateY(20px);
+                    }
+
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+
+                .section-heading {
+                    text-align: center;
+                    margin-bottom: 55px;
+                }
+
+                    .section-heading .eyebrow {
+                        font-size: 10px;
+                        letter-spacing: 5px;
+                        color: var(--azul);
+                        margin-bottom: 15px;
+                    }
+
+                    .section-heading h2 {
+                        font-family: 'Cormorant Garamond', serif;
+                        font-size: clamp(40px, 6vw, 65px);
+                        font-weight: 400;
+                    }
+
+                    .section-heading p {
+                        color: var(--texto-suave);
+                        font-size: 13px;
+                        margin-top: 15px;
+                        line-height: 1.8;
+                    }
+
+                /* =========================================
+           8. INICIO / CIELO NOCTURNO
+        ========================================= */
+
+                #inicio {
+                    position: relative;
+                    overflow: hidden;
+                    min-height: 100vh;
+                    display: none;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                }
+
+                    #inicio.active {
+                        display: flex;
+                    }
+
+                .home-content {
+                    max-width: 750px;
+                    position: relative;
+                    z-index: 3;
+                }
+
+                    .home-content .small-title {
+                        color: var(--azul);
+                        font-size: 11px;
+                        letter-spacing: 6px;
+                        margin-bottom: 25px;
+                    }
+
+                    .home-content h1 {
+                        font-family: 'Cormorant Garamond', serif;
+                        font-weight: 400;
+                        font-size: clamp(55px, 10vw, 110px);
+                        line-height: .95;
+                    }
+
+                        .home-content h1 span {
+                            color: var(--azul);
+                            font-style: italic;
+                        }
+
+                    .home-content p {
+                        max-width: 450px;
+                        margin: 30px auto;
+                        color: var(--texto-suave);
+                        font-size: 14px;
+                        line-height: 2;
+                    }
+
+                .constellation {
+                    position: absolute;
+                    width: 220px;
+                    height: 220px;
+                    border: 1px solid rgba(85,184,232,.1);
+                    border-radius: 50%;
+                    animation: rotateConstellation 35s linear infinite;
+                }
+
+                    .constellation::before,
+                    .constellation::after {
+                        content: "";
+                        position: absolute;
+                        inset: 20px;
+                        border: 1px solid rgba(85,184,232,.1);
+                        border-radius: 50%;
+                    }
+
+                    .constellation::after {
+                        transform: rotate(60deg);
+                    }
+
+                    .constellation.one {
+                        top: 20%;
+                        left: 10%;
+                    }
+
+                    .constellation.two {
+                        bottom: 10%;
+                        right: 8%;
+                        width: 150px;
+                        height: 150px;
+                        animation-direction: reverse;
+                    }
+
+                @keyframes rotateConstellation {
+                    to {
+                        transform: rotate(360deg);
+                    }
+                }
+
+                .star {
+                    position: absolute;
+                    width: 3px;
+                    height: 3px;
+                    background: white;
+                    border-radius: 50%;
+                    box-shadow: 0 0 10px var(--azul);
+                    animation: twinkle 3s infinite alternate;
+                }
+
+                @keyframes twinkle {
+                    from {
+                        opacity: .2;
+                        transform: scale(.7);
+                    }
+
+                    to {
+                        opacity: 1;
+                        transform: scale(1.6);
+                    }
+                }
+
+                /* =========================================
+           9. CARTA Y SOBRE
+        ========================================= */
+
+                .letter-container {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                }
+
+                .letter-intro {
+                    text-align: center;
+                    margin-bottom: 50px;
+                }
+
+                    .letter-intro p {
+                        color: var(--texto-suave);
+                        font-size: 13px;
+                        line-height: 2;
+                    }
+
+                .envelope-area {
+                    perspective: 1200px;
+                    margin: 20px auto 50px;
+                    width: min(90vw, 420px);
+                    height: 280px;
+                }
+
+                .envelope {
+                    position: relative;
+                    width: 100%;
+                    height: 100%;
+                    background: #124B38;
+                    border-radius: 5px;
+                    box-shadow: 0 30px 70px rgba(0,0,0,.35), 0 0 30px rgba(85,184,232,.08);
+                    cursor: pointer;
+                    transition: .5s;
+                }
+
+                    .envelope:hover {
+                        transform: translateY(-8px);
+                    }
+
+                .envelope-back {
+                    position: absolute;
+                    inset: 0;
+                    background: #0B3B2C;
+                    border-radius: 5px;
+                }
+
+                .envelope-flap {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 55%;
+                    background: #1C7650;
+                    clip-path: polygon(0 0, 100% 0, 50% 100%);
+                    transform-origin: top;
+                    transition: transform .9s ease;
+                    z-index: 5;
+                }
+
+                .envelope.open .envelope-flap {
+                    transform: rotateX(180deg);
+                    z-index: 1;
+                }
+
+                .envelope-front {
+                    position: absolute;
+                    inset: 0;
+                    background: linear-gradient(145deg, transparent 49.5%, #145A3A 50%), linear-gradient(215deg, transparent 49.5%, #1B6848 50%);
+                    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+                    z-index: 3;
+                }
+
+                    .envelope-front::after {
+                        content: "";
+                        position: absolute;
+                        inset: 0;
+                        background: linear-gradient( 135deg, transparent 49%, rgba(0,0,0,.12) 50%, transparent 51% );
+                    }
+
+                .envelope-seal {
+                    position: absolute;
+                    left: 50%;
+                    top: 54%;
+                    transform: translate(-50%,-50%);
+                    width: 55px;
+                    height: 55px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    border-radius: 50%;
+                    color: var(--azul);
+                    background: #092C22;
+                    border: 1px solid var(--azul);
+                    font-family: 'Cormorant Garamond', serif;
+                    font-size: 25px;
+                    z-index: 6;
+                    transition: .5s;
+                }
+
+                .envelope.open .envelope-seal {
+                    opacity: 0;
+                    transform: translate(-50%,-50%) scale(.4);
+                }
+
+                .envelope-label {
+                    position: absolute;
+                    bottom: 25px;
+                    left: 0;
+                    right: 0;
+                    text-align: center;
+                    color: rgba(255,255,255,.8);
+                    font-family: 'Cormorant Garamond', serif;
+                    font-size: 21px;
+                    z-index: 4;
+                }
+
+                .click-hint {
+                    text-align: center;
+                    color: var(--azul);
+                    font-size: 11px;
+                    letter-spacing: 2px;
+                    margin-top: 20px;
+                }
+
+                /* CARTA ABIERTA */
+
+                .letter-paper {
+                    display: none;
+                    width: min(90%, 700px);
+                    padding: 55px 45px;
+                    color: var(--texto-papel);
+                    background: var(--papel);
+                    border-radius: 3px;
+                    box-shadow: 0 30px 90px rgba(0,0,0,.35);
+                    animation: paperAppear 1.2s ease;
+                }
+
+                    .letter-paper.active {
+                        display: block;
+                    }
+
+                @keyframes paperAppear {
+                    from {
+                        opacity: 0;
+                        transform: translateY(40px) scale(.95);
+                    }
+
+                    to {
+                        opacity: 1;
+                        transform: translateY(0) scale(1);
+                    }
+                }
+
+                .paper-date {
+                    text-align: right;
+                    font-family: 'Cormorant Garamond', serif;
+                    font-size: 15px;
+                    color: #777;
+                }
+
+                .letter-paper h2 {
+                    font-family: 'Cormorant Garamond', serif;
+                    font-size: 38px;
+                    color: var(--azul-oscuro);
+                    font-weight: 500;
+                    margin: 30px 0;
+                }
+
+                .letter-paper p {
+                    font-family: 'Cormorant Garamond', serif;
+                    font-size: 21px;
+                    line-height: 1.9;
+                    margin-bottom: 22px;
+                }
+
+                .letter-signature {
+                    margin-top: 45px;
+                    text-align: right;
+                }
+
+                    .letter-signature span {
+                        display: block;
+                        font-family: 'Cormorant Garamond', serif;
+                        font-size: 23px;
+                        font-style: italic;
+                        color: #145A3A;
+                    }
+
+                .close-letter {
+                    margin-top: 30px;
+                    background: transparent;
+                    color: var(--azul-oscuro);
+                    border-bottom: 1px solid var(--azul-oscuro);
+                    padding: 8px;
+                }
+
+                /* =========================================
+           10. RECUERDOS
+        ========================================= */
+
+                .memories-container {
+                    max-width: 850px;
+                    margin: auto;
+                    position: relative;
+                }
+
+                    .memories-container::before {
+                        content: "";
+                        position: absolute;
+                        left: 50%;
+                        top: 0;
+                        bottom: 0;
+                        width: 1px;
+                        background: linear-gradient( transparent, var(--azul), rgba(85,184,232,.1), transparent );
+                    }
+
+                .memory-card {
+                    width: 44%;
+                    padding: 25px;
+                    margin-bottom: 40px;
+                    background: rgba(255,255,255,.045);
+                    border: 1px solid rgba(85,184,232,.15);
+                    border-radius: 12px;
+                    position: relative;
+                    cursor: pointer;
+                    transition: .4s;
+                }
+
+                    .memory-card:nth-child(even) {
+                        margin-left: auto;
+                    }
+
+                    .memory-card:hover {
+                        transform: translateY(-7px);
+                        border-color: var(--azul);
+                        background: rgba(85,184,232,.07);
+                    }
+
+                    .memory-card::after {
+                        content: "";
+                        position: absolute;
+                        width: 12px;
+                        height: 12px;
+                        top: 30px;
+                        right: -14%;
+                        background: var(--azul);
+                        border-radius: 50%;
+                        box-shadow: 0 0 15px var(--azul);
+                    }
+
+                    .memory-card:nth-child(even)::after {
+                        right: auto;
+                        left: -14%;
+                    }
+
+                .memory-date {
+                    color: var(--azul);
+                    font-size: 10px;
+                    letter-spacing: 3px;
+                    margin-bottom: 12px;
+                }
+
+                .memory-card h3 {
+                    font-family: 'Cormorant Garamond', serif;
+                    font-size: 27px;
+                    font-weight: 400;
+                    margin-bottom: 12px;
+                }
+
+                .memory-card p {
+                    color: var(--texto-suave);
+                    font-size: 12px;
+                    line-height: 1.8;
+                }
+
+                .memory-extra {
+                    display: none;
+                    margin-top: 15px;
+                    color: var(--azul);
+                    font-size: 12px;
+                    line-height: 1.8;
+                }
+
+                .memory-card.expanded .memory-extra {
+                    display: block;
+                    animation: fadeIn .4s ease;
+                }
+
+                /* =========================================
+           11. JARDIN NOCTURNO
+        ========================================= */
+
+                .garden-container {
+                    min-height: 480px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    gap: 35px;
+                    max-width: 800px;
+                    margin: auto;
+                    position: relative;
+                }
+
+                    .garden-container::before {
+                        content: "";
+                        position: absolute;
+                        width: 100%;
+                        height: 120px;
+                        bottom: 0;
+                        background: linear-gradient( transparent, rgba(8,55,34,.55) );
+                        border-radius: 50%;
+                        filter: blur(20px);
+                    }
+
+                .flower {
+                    width: 130px;
+                    height: 170px;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: center;
+                    position: relative;
+                    z-index: 2;
+                    cursor: pointer;
+                    transition: .4s;
+                }
+
+                    .flower:hover {
+                        transform: translateY(-12px) scale(1.08);
+                    }
+
+                .flower-head {
+                    position: relative;
+                    width: 75px;
+                    height: 75px;
+                    animation: flowerFloat 4s infinite ease-in-out;
+                }
+
+                .petal {
+                    position: absolute;
+                    width: 27px;
+                    height: 38px;
+                    left: 24px;
+                    top: 0;
+                    background: #55B8E8;
+                    border-radius: 50% 50% 40% 40%;
+                    transform-origin: 13px 38px;
+                    box-shadow: 0 0 15px rgba(85,184,232,.4);
+                }
+
+                    .petal:nth-child(2) {
+                        transform: rotate(72deg);
+                    }
+
+                    .petal:nth-child(3) {
+                        transform: rotate(144deg);
+                    }
+
+                    .petal:nth-child(4) {
+                        transform: rotate(216deg);
+                    }
+
+                    .petal:nth-child(5) {
+                        transform: rotate(288deg);
+                    }
+
+                .flower-center {
+                    position: absolute;
+                    width: 20px;
+                    height: 20px;
+                    top: 27px;
+                    left: 27px;
+                    background: #F2D28B;
+                    border-radius: 50%;
+                    z-index: 3;
+                    box-shadow: 0 0 15px #F2D28B;
+                }
+
+                .flower-stem {
+                    width: 3px;
+                    height: 65px;
+                    background: linear-gradient(#55B878, #145A3A);
+                }
+
+                .flower-label {
+                    color: var(--texto-suave);
+                    font-family: 'Cormorant Garamond', serif;
+                    font-size: 17px;
+                    margin-top: 8px;
+                }
+
+                @keyframes flowerFloat {
+                    0%, 100% {
+                        transform: translateY(0) rotate(-4deg);
+                    }
+
+                    50% {
+                        transform: translateY(-10px) rotate(4deg);
+                    }
+                }
+
+                /* MENSAJE DE FLORES */
+
+                .flower-message {
+                    position: fixed;
+                    inset: 0;
+                    z-index: 400;
+                    display: none;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 20px;
+                    background: rgba(0,0,0,.7);
+                    backdrop-filter: blur(10px);
+                }
+
+                    .flower-message.active {
+                        display: flex;
+                    }
+
+                .flower-message-box {
+                    width: min(90%, 420px);
+                    padding: 45px 30px;
+                    background: #0A3024;
+                    border: 1px solid rgba(85,184,232,.4);
+                    border-radius: 15px;
+                    text-align: center;
+                    animation: paperAppear .5s ease;
+                }
+
+                    .flower-message-box .symbol {
+                        color: var(--azul);
+                        font-size: 35px;
+                        margin-bottom: 20px;
+                    }
+
+                    .flower-message-box h3 {
+                        font-family: 'Cormorant Garamond', serif;
+                        font-size: 32px;
+                        font-weight: 400;
+                        margin-bottom: 15px;
+                    }
+
+                    .flower-message-box p {
+                        color: var(--texto-suave);
+                        font-size: 13px;
+                        line-height: 2;
+                    }
+
+                    .flower-message-box button {
+                        margin-top: 25px;
+                        color: var(--azul);
+                        background: transparent;
+                        border-bottom: 1px solid var(--azul);
+                        padding: 8px;
+                    }
+
+                /* =========================================
+           12. MUSICA
+        ========================================= */
+
+                .music-container {
+                    max-width: 800px;
+                    margin: auto;
+                }
+
+                .music-intro {
+                    text-align: center;
+                    color: var(--texto-suave);
+                    font-size: 13px;
+                    line-height: 2;
+                    margin-bottom: 40px;
+                }
+
+                .music-card {
+                    display: flex;
+                    align-items: center;
+                    gap: 25px;
+                    padding: 22px;
+                    margin-bottom: 18px;
+                    background: rgba(255,255,255,.045);
+                    border: 1px solid rgba(85,184,232,.14);
+                    border-radius: 12px;
+                    transition: .4s;
+                }
+
+                    .music-card:hover {
+                        transform: translateX(8px);
+                        border-color: var(--azul);
+                    }
+
+                .album-art {
+                    width: 90px;
+                    height: 90px;
+                    flex-shrink: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: radial-gradient(circle, #1C7650, #062B20);
+                    border: 1px solid rgba(85,184,232,.35);
+                    border-radius: 8px;
+                    color: var(--azul);
+                    font-family: 'Cormorant Garamond', serif;
+                    font-size: 30px;
+                }
+
+                .music-info {
+                    flex: 1;
+                }
+
+                    .music-info h3 {
+                        font-family: 'Cormorant Garamond', serif;
+                        font-size: 25px;
+                        font-weight: 400;
+                    }
+
+                    .music-info p {
+                        color: var(--texto-suave);
+                        font-size: 11px;
+                        margin-top: 5px;
+                    }
+
+                .spotify-button {
+                    padding: 12px 20px;
+                    color: white;
+                    background: #1DB954;
+                    border-radius: 30px;
+                    font-size: 11px;
+                    font-weight: 600;
+                    transition: .3s;
+                }
+
+                    .spotify-button:hover {
+                        background: #1ed760;
+                        transform: scale(1.05);
+                    }
+
+                .wave {
+                    display: flex;
+                    gap: 3px;
+                    align-items: center;
+                    height: 30px;
+                    margin-top: 10px;
+                }
+
+                    .wave span {
+                        width: 3px;
+                        height: 7px;
+                        background: var(--azul);
+                        border-radius: 5px;
+                        animation: waveMove .8s infinite alternate;
+                    }
+
+                        .wave span:nth-child(2) {
+                            animation-delay: .2s;
+                        }
+
+                        .wave span:nth-child(3) {
+                            animation-delay: .4s;
+                        }
+
+                        .wave span:nth-child(4) {
+                            animation-delay: .1s;
+                        }
+
+                        .wave span:nth-child(5) {
+                            animation-delay: .3s;
+                        }
+
+                @keyframes waveMove {
+                    to {
+                        height: 25px;
+                    }
+                }
+
+                /* =========================================
+           13. PROPOSITO 
+        ========================================= */
+
+                .purpose-box {
+                    max-width: 650px;
+                    margin: auto;
+                    padding: 50px 35px;
+                    text-align: center;
+                    background: rgba(255,255,255,.035);
+                    border: 1px solid rgba(85,184,232,.18);
+                    border-radius: 15px;
+                }
+
+                    .purpose-box .symbol {
+                        font-size: 35px;
+                        color: var(--azul);
+                        margin-bottom: 25px;
+                    }
+
+                    .purpose-box h2 {
+                        font-family: 'Cormorant Garamond', serif;
+                        font-size: 40px;
+                        font-weight: 400;
+                        margin-bottom: 20px;
+                    }
+
+                    .purpose-box p {
+                        color: var(--texto-suave);
+                        font-size: 13px;
+                        line-height: 2.2;
+                    }
+
+                /* =========================================
+           14. FOOTER
+        ========================================= */
+
+                footer {
+                    position: relative;
+                    z-index: 2;
+                    padding: 35px 20px;
+                    text-align: center;
+                    color: rgba(255,255,255,.4);
+                    font-size: 10px;
+                    letter-spacing: 3px;
+                    border-top: 1px solid rgba(255,255,255,.05);
+                }
+
+                /* =========================================
+           15. ANIMACIONES GENERALES
+        ========================================= */
+
+                @keyframes appear {
+                    from {
+                        opacity: 0;
+                        transform: translateY(20px);
+                    }
+
+                    to {
+                        opacity: 1;
+                        transform: translateY(0);
+                    }
+                }
+
+                @keyframes fadeIn {
+                    from {
+                        opacity: 0;
+                    }
+
+                    to {
+                        opacity: 1;
+                    }
+                }
+
+                /* =========================================
+           16. RESPONSIVE
+        ========================================= */
+
+                @media (max-width: 700px) {
+
+                    .topbar {
+                        padding: 0 22px;
+                    }
+
+                    .page-section {
+                        padding: 110px 6% 60px;
+                    }
+
+                    .memories-container::before {
+                        left: 8px;
+                    }
+
+                    .memory-card,
+                    .memory-card:nth-child(even) {
+                        width: calc(100% - 35px);
+                        margin-left: 35px;
+                    }
+
+                        .memory-card::after,
+                        .memory-card:nth-child(even)::after {
+                            left: -33px;
+                            right: auto;
+                        }
+
+                    .letter-paper {
+                        padding: 35px 25px;
+                    }
+
+                        .letter-paper p {
+                            font-size: 19px;
+                        }
+
+                    .music-card {
+                        gap: 15px;
+                        flex-wrap: wrap;
+                    }
+
+                    .album-art {
+                        width: 65px;
+                        height: 65px;
+                    }
+
+                    .music-info h3 {
+                        font-size: 21px;
+                    }
+
+                    .spotify-button {
+                        margin-left: auto;
+                    }
+
+                    .garden-container {
+                        gap: 10px;
+                    }
+
+                    .flower {
+                        width: 105px;
+                    }
+
+                    .constellation.one {
+                        left: -100px;
+                    }
+
+                    .constellation.two {
+                        right: -60px;
+                    }
+                }
+    </style>
+</head>
+
+<body>
+
+    <!-- FONDO -->
+
+    <canvas id="particles"></canvas>
+
+    <div class="ambient-light light-one"></div>
+    <div class="ambient-light light-two"></div>
+
+
+    <!-- =====================================
+         LOGIN
+    ===================================== -->
+
+    <div id="loginScreen">
+
+        <div class="login-box">
+
+            <div class="login-symbol">✧</div>
+
+            <h1>Endless Love</h1>
+
+            <p>UN PEQUEÑO UNIVERSO PARA TI</p>
+
+            <input type="password"
+                   id="passwordInput"
+                   placeholder="••••••"
+                   maxlength="20">
+
+            <br>
+
+            <button class="primary-button" onclick="entrar()">
+                ENTRAR
+            </button>
+
+            <div class="error-message" id="errorMessage"></div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+         INTRO 
+    ===================================== -->
+
+    <div id="introScreen">
+
+        <div class="intro-content">
+
+            <div class="intro-small">
+                BIENVENIDA A ENDLESS LOVE
+            </div>
+
+            <h1>
+                Hay lugares que no existen en los mapas,
+                <span>pero se sienten como hogar.</span>
+            </h1>
+
+            <p>
+                Las cosas mas bonitas no necesitan
+                demasiadas explicaciones. Solo necesitan
+                un lugar donde existir.
+            </p>
+
+            <button class="intro-button" onclick="abrirUniverso()">
+                DESCUBRIR ESTE LUGAR ✧
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================
+          PRINCIPAL
+    ===================================== -->
+
+    <div id="mainApp">
+
+        <!-- HEADER -->
+
+        <header class="topbar">
+
+            <div class="logo">
+                ENDLESS LOVE
+            </div>
+
+            <button class="menu-button" onclick="toggleMenu()">
+                ☰
+            </button>
+
+        </header>
+
+
+        <!-- MENÚ LATERAL -->
+
+        <div class="menu-overlay" id="menuOverlay" onclick="toggleMenu()"></div>
+
+        <aside class="sidebar" id="sidebar">
+
+            <h2>Explorar</h2>
+
+            <button onclick="ir('inicio')">
+                ✧ Inicio
+            </button>
+
+            <button onclick="ir('carta')">
+                ♡ Carta
+            </button>
+
+            <button onclick="ir('recuerdos')">
+                ✦ Pequeños detalles
+            </button>
+
+            <button onclick="ir('jardin')">
+                ❀ Jardin nocturno
+            </button>
+
+            <button onclick="ir('musica')">
+                ♪ Musica
+            </button>
+
+            <button onclick="ir('proposito')">
+                ✧ Proposito
+            </button>
+
+        </aside>
+
+
+        <!-- =================================
+             INICIO
+        ================================== -->
+
+        <section class="page-section active" id="inicio">
+
+            <div class="constellation one"></div>
+            <div class="constellation two"></div>
+
+            <div class="home-content">
+
+                <div class="small-title">
+                    UN LUGAR HECHO DE PEQUEÑOS DETALLES
+                </div>
+
+                <h1>
+                    ENDLESS <span>LOVE.</span>
+                </h1>
+
+                <p>
+                    No es un lugar cualquiera.
+                    Es una pequeña coleccion de momentos,
+                    palabras, canciones y detalles
+                    que merecen tener su propio espacio y que tu puedas visitarlo.
+                </p>
+
+                <button class="primary-button" onclick="ir('carta')">
+                    COMENZAR A DESCUBRIR
+                </button>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             CARTA
+        ================================== -->
+
+        <section class="page-section" id="carta">
+
+            <div class="section-heading">
+
+                <div class="eyebrow">
+                    UNAS PALABRAS PARA TI
+                </div>
+
+                <h2>Una carta.</h2>
+
+                <p>
+                    Hay cosas que merecen escribirse con todo el corazon.
+                </p>
+
+            </div>
+
+
+            <div class="letter-container">
+
+                <div class="letter-intro">
+
+                    <p>
+                        Prepare algo para ti.<br>
+                        Tomate un momento y abre el sobre.
+                    </p>
+
+                </div>
+
+
+                <div class="envelope-area">
+
+                    <div class="envelope" id="envelope" onclick="abrirCarta()">
+
+                        <div class="envelope-back"></div>
+
+                        <div class="envelope-flap"></div>
+
+                        <div class="envelope-front"></div>
+
+                        <div class="envelope-seal">
+                            ✧
+                        </div>
+
+                        <div class="envelope-label">
+                            Para Judith (El amor de mi vida)
+                        </div>
+
+                    </div>
+
+                    <div class="click-hint" id="clickHint">
+                        TOCA EL SOBRE PARA ABRIRLO
+                    </div>
+
+                </div>
+
+
+                <!-- CONTENIDO DE LA CARTA -->
+
+                <article class="letter-paper" id="letterPaper">
+
+                    
+
+                    <h2>Hola, Judith.</h2>
+
+                    <p>
+                        No se exactamente por donde empezar, porque hay sentimientos
+                        que a veces son dificiles de explicar con palabras.
+                        Pero queria tomarme el tiempo de escribirte algo que
+                        realmente saliera de mi.
+                    </p>
+
+                    <p>
+                        A pesar de todas las cosas que han pasado, de los momentos
+                        buenos, de los complicados y de todo aquello que quizas
+                        no siempre ha sido sencillo hubo algo que nunca pude
+                        ignorar y es lo que llegue a sentir por ti.
+                    </p>
+
+                    <p>
+                        Y es que entre tantas cosas termine encontrando en ti
+                        a alguien por quien siento algo muy sincero, algo que no
+                        nacio de un momento, de una emoción pasajera o de una
+                        simple ilusión. Es algo que ha ido creciendo y que
+                        con el tiempo me ha hecho darme cuenta de lo mucho
+                        que significas para m.
+                    </p>
+
+                    <p>
+                        No se que nos tenga preparado la vida, ni puedo asegurar
+                        que todo será siempre facil. Pero si se que si hay algo
+                        que me gustaria, es seguir descubriéndote, acompañarte
+                        en tus sueños, verte cumplir cada una de tus metas,
+                        estar contigo en los dias bonitos y tambien en aquellos
+                        en los que las cosas no salgan como esperabas.
+                    </p>
+
+                    <p>
+                        Me gustaria conocer cada version de ti, seguir aprendiendo
+                        de tu manera de ver el mundo, compartir risas, viajes,
+                        planes espontaneos y hasta esos dias ordinarios que
+                        cuando se comparten con la persona correcta terminan
+                        convirtiendose en recuerdos extraordinarios.
+                    </p>
+
+                    <p>
+                        Y quizas suene demasiado grande decirlo, pero me gustaria
+                        permanecer a tu lado durante una vida entera. No porque
+                        crea que todo será perfecto sino porque siento que lo
+                        que hay en mi por ti merece la oportunidad de crecer,
+                        de construirse y de convertirse en algo que dure.
+                    </p>
+
+                    <p>
+                        No quiero que estas palabras sean solamente bonitas
+                        quiero que algun dia puedas mirar atras y darte cuenta
+                        de que realmente hubo alguien que quiso elegirte,
+                        conocerte, cuidarte y construir algo sincero contigo.
+                    </p>
+
+                    <p>
+                        Gracias por formar parte de mi vida y por permitirme
+                        conocer un poquito mas de ti.
+                    </p>
+
+                    <p>
+                        Si algo tengo claro, es que lo que siento por ti es real
+                        y si la vida me lo permite me encantaria que todavia
+                        nos quedaran muchísimas historias por escribir.
+                    </p>
+
+                    <div class="letter-signature">
+
+                        <span>Con todo mi cariño y amor,</span>
+
+                        <span>Isaac.</span>
+
+                        <span style="font-size:15px; margin-top:10px;">
+                            Para Judith. ♡
+                        </span>
+
+                    </div>
+
+                    <button class="close-letter" onclick="cerrarCarta()">
+                        CERRAR CARTA
+                    </button>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             RECUERDOS
+        ================================== -->
+
+        <section class="page-section" id="recuerdos">
+
+            <div class="section-heading">
+
+                <div class="eyebrow">
+                    NUESTRA PEQUEÑA HISTORIA
+                </div>
+
+                <h2>Lo que quiero que sepas</h2>
+
+                
+
+            </div>
+
+
+            <div class="memories-container">
+
+                <!-- RECUERDO 1 -->
+
+                <div class="memory-card" onclick="expandirRecuerdo(this)">
+
+                    <div class="memory-date">
+                        ALGO QUE ME GUSTA DE TI
+                    </div>
+
+                    <h3>Tu manera de ser.</h3>
+
+                    <p>
+                        Hay algo en ti que me hace querer conocerte
+                        un poquito mas cada dia.
+                    </p>
+
+                    <div class="memory-extra">
+                        Me gusta tu forma de ver la vida, tus ocurrencias,
+                        tu manera de sonreír y esos pequeños detalles
+                        que quizás tú no notas o ves como pequeños, pero que para mi
+                        te hacen alguien especial.
+                    </div>
+
+                </div>
+
+                <!-- RECUERDO 2 -->
+
+                <div class="memory-card" onclick="expandirRecuerdo(this)">
+
+                    <div class="memory-date">
+                        ALGO QUE QUIERO PARA TI
+                    </div>
+
+                    <h3>Verte cumplir tus sueños.</h3>
+
+                    <p>
+                        Quiero verte llegar tan lejos como siempre
+                        has imaginado.
+                    </p>
+
+                    <div class="memory-extra">
+                        Espero estar ahi para celebrar tus logros,
+                        recordarte lo capaz que eres cuando dudes
+                        de ti misma y aplaudir cada paso que des.
+                        Nunca dejes de creer en todo lo que puedes lograr.
+                    </div>
+
+                </div>
+
+                <!-- RECUERDO 3 -->
+
+                <div class="memory-card" onclick="expandirRecuerdo(this)">
+
+                    <div class="memory-date">
+                        LO QUE SIENTO
+                    </div>
+
+                    <h3>Algo sincero.</h3>
+
+                    <p>
+                        No necesito que todo sea perfecto para saber
+                        que quiero intentarlo contigo.
+                    </p>
+
+                    <div class="memory-extra">
+                        A pesar de las cosas que podamos vivir,
+                        hay algo en mi que sigue eligiendo conocerte,
+                        compartir momentos contigo y descubrir
+                        todo lo bonito que todavia nos falta vivir.
+                    </div>
+
+                </div>
+
+                <!-- RECUERDO 4 -->
+
+                <div class="memory-card" onclick="expandirRecuerdo(this)">
+
+                    <div class="memory-date">
+                        LO QUE SUEÑO
+                    </div>
+
+                    <h3>Muchos capitulos mas.</h3>
+
+                    <p>
+                        Ojala la vida nos permita escribir
+                        muchísimas historias juntos.
+                    </p>
+
+                    <div class="memory-extra">
+                        Me ilusiona imaginar viajes, nuevos lugares,
+                        tardes sin planes, risas inesperadas y una vida
+                        llena de momentos compartidos. No se que nos
+                        espera, pero me encantaría descubrirlo a tu lado.
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             JARDIN NOCTURNO
+        ================================== -->
+
+        <section class="page-section" id="jardin">
+
+            <div class="section-heading">
+
+                <div class="eyebrow">
+                    UN PEQUEÑO JARDIN
+                </div>
+
+                <h2>Flores para ti.</h2>
+
+                <p>
+                    Cada flor guarda un pequeño mensaje.
+                    Descubre lo que esconde cada una.
+                </p>
+
+            </div>
+
+
+            <div class="garden-container">
+
+
+                <div class="flower" onclick="mostrarFlor(0)">
+
+                    <div class="flower-head">
+
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+
+                        <div class="flower-center"></div>
+
+                    </div>
+
+                    <div class="flower-stem"></div>
+
+                    <div class="flower-label">
+                        Admiracion
+                    </div>
+
+                </div>
+
+
+                <div class="flower" onclick="mostrarFlor(1)">
+
+                    <div class="flower-head">
+
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+
+                        <div class="flower-center"></div>
+
+                    </div>
+
+                    <div class="flower-stem"></div>
+
+                    <div class="flower-label">
+                        Sonrisas
+                    </div>
+
+                </div>
+
+
+                <div class="flower" onclick="mostrarFlor(2)">
+
+                    <div class="flower-head">
+
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+
+                        <div class="flower-center"></div>
+
+                    </div>
+
+                    <div class="flower-stem"></div>
+
+                    <div class="flower-label">
+                        Cariño
+                    </div>
+
+                </div>
+
+
+                <div class="flower" onclick="mostrarFlor(3)">
+
+                    <div class="flower-head">
+
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+
+                        <div class="flower-center"></div>
+
+                    </div>
+
+                    <div class="flower-stem"></div>
+
+                    <div class="flower-label">
+                        Magia
+                    </div>
+
+                </div>
+
+
+                <div class="flower" onclick="mostrarFlor(4)">
+
+                    <div class="flower-head">
+
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+                        <div class="petal"></div>
+
+                        <div class="flower-center"></div>
+
+                    </div>
+
+                    <div class="flower-stem"></div>
+
+                    <div class="flower-label">
+                        Especial
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- MENSAJES DEL JARDIN -->
+
+        <div class="flower-message" id="flowerMessage">
+
+            <div class="flower-message-box">
+
+                <div class="symbol">✿</div>
+
+                <h3 id="flowerTitle">
+                    Una pequeña flor.
+                </h3>
+
+                <p id="flowerText">
+                    Un mensaje especial.
+                </p>
+
+                <button onclick="cerrarFlor()">
+                    VOLVER AL JARDIN
+                </button>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================
+             MÚSICA
+        ================================== -->
+
+        <section class="page-section" id="musica">
+
+            <div class="section-heading">
+
+                <div class="eyebrow">
+                    SONIDOS QUE TIENEN ALGO ESPECIAL
+                </div>
+
+                <h2>Una playlist.</h2>
+
+                <p>
+                    Algunas canciones tienen la capacidad
+                    de guardar sensaciones.
+                </p>
+
+            </div>
+
+
+            <div class="music-container">
+
+                <div class="music-intro">
+
+                    Una pequeña selección de canciones
+                    que quería compartir contigo.
+
+                </div>
+
+
+
+                <!-- CANCION 1 -->
+
+                <div class="music-card">
+
+                    <div class="album-art">
+                        ✧
+                    </div>
+
+                    <div class="music-info">
+
+                        <h3>Ropa de Bazar</h3>
+
+                        <p>Porque tambien hay canciones para recordar nuestro amor.</p>
+
+                        <div class="wave">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+
+                    </div>
+
+                    <button class="spotify-button"
+                            onclick="abrirSpotify('https://open.spotify.com/intl-es/track/7kWFRZdedr2gtfE8JDumVZ?si=a6db7fc40ce64857')">
+
+                        ESCUCHAR
+
+                    </button>
+
+                </div>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- =================================
+             PROPOSITO
+        ================================== -->
+
+        <section class="page-section" id="proposito">
+
+            <div class="section-heading">
+
+                <div class="eyebrow">
+                    DETRAS DE ESTE PEQUEÑO UNIVERSO
+                </div>
+
+                <h2>¿Porque existe?</h2>
+
+            </div>
+
+
+            <div class="purpose-box">
+
+                <div class="symbol">
+                    ✧
+                </div>
+
+                <h2>ENDLESS LOVE.</h2>
+
+                <p>
+                    Hay cosas que no siempre sabemos expresar
+                    de la manera correcta.
+
+                    <br><br>
+
+                    Por eso quise crear este pequeño espacio:
+                    para reunir detalles, recuerdos, canciones
+                    y palabras que merecen algo más que
+                    quedarse guardados en una conversación.
+
+                    <br><br>
+
+                    No pretende ser perfecto.
+                    Solamente especial.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+
+        <footer>
+            ENDLESS LOVE · A LITTLE UNIVERSE
+        </footer>
+
+    </div>
+
+
+    <!-- =====================================
+         JAVASCRIPT
+    ===================================== -->
+
+    <script>
+
+        /* =========================================
+           1. LOGIN
+        ========================================= */
+
+        function entrar() {
+
+            const password = document.getElementById("passwordInput").value;
+
+            const error = document.getElementById("errorMessage");
+
+            if (password === "290826") {
+
+                document.getElementById("loginScreen").style.display = "none";
+
+                document.getElementById("introScreen").classList.add("active");
+
+            } else {
+
+                error.textContent = "Parece que esa no es la contraseña.";
+
+                document.getElementById("passwordInput").value = "";
+
+            }
+
+        }
+
+
+        // ENTER PARA INGRESAR
+
+        document.getElementById("passwordInput").addEventListener("keydown", function (e) {
+
+            if (e.key === "Enter") {
+                entrar();
+            }
+
+        });
+
+
+        /* =========================================
+           2. ABRIR UNIVERSO
+        ========================================= */
+
+        function abrirUniverso() {
+
+            document.getElementById("introScreen").classList.remove("active");
+
+            document.getElementById("mainApp").classList.add("active");
+
+            ir("inicio");
+
+        }
+
+
+        /* =========================================
+           3. MENU
+        ========================================= */
+
+        function toggleMenu() {
+
+            document.getElementById("sidebar").classList.toggle("active");
+
+            document.getElementById("menuOverlay").classList.toggle("active");
+
+        }
+
+
+        function cerrarMenu() {
+
+            document.getElementById("sidebar").classList.remove("active");
+
+            document.getElementById("menuOverlay").classList.remove("active");
+
+        }
+
+
+        /* =========================================
+           4. NAVEGACION
+        ========================================= */
+
+        function ir(id) {
+
+            document.querySelectorAll(".page-section").forEach(section => {
+
+                section.classList.remove("active");
+
+            });
+
+            document.getElementById(id).classList.add("active");
+
+            cerrarMenu();
+
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+
+        }
+
+
+        /* =========================================
+           5. ABRIR Y CERRAR CARTA
+        ========================================= */
+
+        let cartaAbierta = false;
+
+        function abrirCarta() {
+
+            if (cartaAbierta) return;
+
+            cartaAbierta = true;
+
+            const envelope = document.getElementById("envelope");
+
+            envelope.classList.add("open");
+
+            document.getElementById("clickHint").style.opacity = "0";
+
+            setTimeout(() => {
+
+                document.getElementById("letterPaper").classList.add("active");
+
+                document.getElementById("letterPaper").scrollIntoView({
+                    behavior: "smooth",
+                    block: "center"
+                });
+
+            }, 850);
+
+        }
+
+
+        function cerrarCarta() {
+
+            document.getElementById("letterPaper").classList.remove("active");
+
+            document.getElementById("envelope").classList.remove("open");
+
+            document.getElementById("clickHint").style.opacity = "1";
+
+            cartaAbierta = false;
+
+        }
+
+
+        /* =========================================
+           6. RECUERDOS EXPANDIBLES
+        ========================================= */
+
+        function expandirRecuerdo(card) {
+
+            card.classList.toggle("expanded");
+
+        }
+
+
+        /* =========================================
+           7. JARDIN NOCTURNO
+        ========================================= */
+
+
+           const flores = [
+
+            {
+                titulo: "Admiracion",
+                mensaje: "Admiro mucho mas de ti de lo que quizas imaginas. Me gusta tu manera de ser, tu forma de pensar y esa capacidad que tienes de hacer especiales hasta los momentos mas sencillos."
+            },
+
+            {
+                titulo: "Tu sonrisa",
+                mensaje: "Espero que nunca te falten motivos para sonreir. Y cuando tengas dias dificiles, quiero que recuerdes lo valiosa que eres y todo lo bonito que hay en ti."
+            },
+
+            {
+                titulo: "Tus sueños",
+                mensaje: "Deseo verte cumplir cada una de tus metas. Quiero verte crecer, convertirte en todo aquello que sueñas y recordarte cuando lo necesites, que eres mucho mas capaz de lo que a veces crees."
+            },
+
+            {
+                titulo: "Mi cariño",
+                mensaje: "Lo que siento por ti es algo que nace desde lo más sincero de mi. No necesito grandes ocasiones para demostrarte que me importas y tambien quiero hacerlo en los pequeños detalles de cada dia."
+            },
+
+            {
+                titulo: "Nuestro futuro",
+                mensaje: "No se cuantas historias nos esperan ni que caminos nos tocara recorrer, pero me ilusiona pensar que todavía tenemos muchísimos momentos por compartir y si la vida nos lo permite, me encantaria vivirlos a tu lado y formar contigo una vida completa."
+            }
+
+        ];
+
+
+        function mostrarFlor(numero) {
+
+            document.getElementById("flowerTitle").textContent =
+                flores[numero].titulo;
+
+            document.getElementById("flowerText").textContent =
+                flores[numero].mensaje;
+
+            document.getElementById("flowerMessage").classList.add("active");
+
+        }
+
+
+        function cerrarFlor() {
+
+            document.getElementById("flowerMessage").classList.remove("active");
+
+        }
+
+
+        /* =========================================
+           8. SPOTIFY
+        ========================================= */
+
+        function abrirSpotify(url) {
+
+            window.open(url, "_blank", "noopener,noreferrer");
+
+        }
+
+
+        /* =========================================
+           9. PARTICULAS Y ESTRELLAS
+        ========================================= */
+
+        const canvas = document.getElementById("particles");
+
+        const ctx = canvas.getContext("2d");
+
+        let particles = [];
+
+        let mouse = {
+            x: window.innerWidth / 2,
+            y: window.innerHeight / 2
+        };
+
+
+        function ajustarCanvas() {
+
+            canvas.width = window.innerWidth;
+
+            canvas.height = window.innerHeight;
+
+        }
+
+
+        window.addEventListener("resize", ajustarCanvas);
+
+        ajustarCanvas();
+
+
+        window.addEventListener("mousemove", function (e) {
+
+            mouse.x = e.clientX;
+
+            mouse.y = e.clientY;
+
+            document.documentElement.style.setProperty(
+                "--mouseX",
+                e.clientX + "px"
+            );
+
+            document.documentElement.style.setProperty(
+                "--mouseY",
+                e.clientY + "px"
+            );
+
+        });
+
+
+        class Particle {
+
+            constructor() {
+
+                this.x = Math.random() * canvas.width;
+
+                this.y = Math.random() * canvas.height;
+
+                this.size = Math.random() * 2 + .3;
+
+                this.speedX = (Math.random() - .5) * .3;
+
+                this.speedY = (Math.random() - .5) * .3;
+
+                this.opacity = Math.random() * .7 + .1;
+
+                this.color = Math.random() > .5
+                    ? "85,184,232"
+                    : "110,190,145";
+
+            }
+
+
+            update() {
+
+                this.x += this.speedX;
+
+                this.y += this.speedY;
+
+
+                const dx = mouse.x - this.x;
+
+                const dy = mouse.y - this.y;
+
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+
+                if (distance < 120) {
+
+                    this.x -= dx * .0008;
+
+                    this.y -= dy * .0008;
+
+                }
+
+
+                if (this.x < 0) this.x = canvas.width;
+
+                if (this.x > canvas.width) this.x = 0;
+
+                if (this.y < 0) this.y = canvas.height;
+
+                if (this.y > canvas.height) this.y = 0;
+
+            }
+
+
+            draw() {
+
+                ctx.beginPath();
+
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+
+                ctx.fillStyle =
+                    `rgba(${this.color},${this.opacity})`;
+
+                ctx.shadowBlur = 12;
+
+                ctx.shadowColor =
+                    `rgba(${this.color},.6)`;
+
+                ctx.fill();
+
+                ctx.shadowBlur = 0;
+
+            }
+
+        }
+
+
+        /* CREAR PARTICULAS */
+
+        for (let i = 0; i < 100; i++) {
+
+            particles.push(new Particle());
+
+        }
+
+
+        /* ANIMAR */
+
+        function animateParticles() {
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            particles.forEach(particle => {
+
+                particle.update();
+
+                particle.draw();
+
+            });
+
+            requestAnimationFrame(animateParticles);
+
+        }
+
+        animateParticles();
+
+
+        /* =========================================
+           10. ESTRELLAS ADICIONALES
+        ========================================= */
+
+        function crearEstrellas() {
+
+            const inicio = document.getElementById("inicio");
+
+            for (let i = 0; i < 35; i++) {
+
+                const star = document.createElement("div");
+
+                star.classList.add("star");
+
+                star.style.left = Math.random() * 100 + "%";
+
+                star.style.top = Math.random() * 100 + "%";
+
+                star.style.animationDelay = Math.random() * 4 + "s";
+
+                inicio.appendChild(star);
+
+            }
+
+        }
+
+        crearEstrellas();
+
+
+        /* =========================================
+           11. CERRAR MENSAJE CON ESCAPE
+        ========================================= */
+
+        document.addEventListener("keydown", function (e) {
+
+            if (e.key === "Escape") {
+
+                cerrarMenu();
+
+                cerrarFlor();
+
+            }
+
+        });
+
+    </script>
+
+</body>
+</html>
